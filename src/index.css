@@ -5,3 +5,32 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  background: #1a1a2e;
+  font-family: sans-serif;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.board {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.column {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 280px;
+  min-height: 500px;
+}
+
+.column h2 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a0a0b0;
+}
