@@ -10,6 +10,15 @@ function App() {
     { id: 3, text: "Read a book", column: "Done" },
   ]);
 
+  function addCard(columnTitle, text) {
+    const newCard = {
+      id: Date.now(),
+      text,
+      column: columnTitle,
+    };
+    setCards([...cards, newCard]);
+  }
+
   return (
     <div className='app'>
       <header className="header">
@@ -20,7 +29,8 @@ function App() {
           <Column 
             key={col}
             title={col}
-            cards={cards.filter((card) => card.column === col)} />
+            cards={cards.filter((card) => card.column === col)}
+            onAddCard={addCard} />
         ))}
       </div>
     </div>
