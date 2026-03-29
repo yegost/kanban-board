@@ -70,8 +70,10 @@ body {
   margin-bottom: 0.75rem;
   cursor: grab;
   border-left: 3px solid #e94560;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
 .card p {
   font-size: 0.9rem;
 }
@@ -134,4 +136,19 @@ body {
 
 .btn-cancel:hover {
   color: #fff;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #a0a0b0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.btn-delete:hover {
+  color: #e94560;
 }
