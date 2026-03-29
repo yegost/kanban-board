@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Column from "./components/Column";
 
 const COLUMNS = ["To Do", "In Progress", "Done"];
 
+const initialCards = [
+  { id: 1, text: "Buy groceries", column: "To Do" },
+  { id: 2, text: "Fix bug", column: "In Progress" },
+  { id: 3, text: "Read a book", column: "Done" },
+]
+
 function App() {
-  const [cards, setCards] = useState([
-    { id: 1, text: "Buy groceries", column: "To Do" },
-    { id: 2, text: "Fix bug", column: "In Progress" },
-    { id: 3, text: "Read a book", column: "Done" },
-  ]);
+  const [cards, setCards] = useState(() => {
+    const saved = localStorage.getItem("kanban-cards");
+    return saved ? JSON.parse(saved) : initialCards;
+  });
   const [draggedId, setDraggedId] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("kanban-cards", JSON.stringify(cards));
+  }, [cards]);
 
   function addCard(columnTitle, text) {
     const newCard = {
