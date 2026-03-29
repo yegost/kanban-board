@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Card from "./Card";
 
-function Column({ title, cards, onAddCard, draggedId, setDraggedId, onDrop }) {
+function Column({ title, cards, onAddCard, onDeleteCard, draggedId, setDraggedId, onDrop }) {
   const [adding, setAdding] = useState(false);
   const [text, setText] = useState("");
 
@@ -36,6 +36,7 @@ function Column({ title, cards, onAddCard, draggedId, setDraggedId, onDrop }) {
             id={card.id}
             text={card.text} 
             onDragStart={setDraggedId}
+            onDelete={onDeleteCard}
         />
       ))}
       {adding ? (

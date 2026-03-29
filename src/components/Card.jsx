@@ -1,4 +1,4 @@
-function Card({ id, text, onDragStart }) {
+function Card({ id, text, onDragStart, onDelete }) {
     return(
         <div 
             className="card"
@@ -6,6 +6,7 @@ function Card({ id, text, onDragStart }) {
             onDragStart={() => onDragStart(id)}
         >
             <p>{text}</p>
+            <button className="btn-delete" onClick={() => onDelete(id)}>✕</button>
         </div>
     );
 }

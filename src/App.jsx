@@ -29,6 +29,10 @@ function App() {
     setCards([...cards, newCard]);
   }
 
+  function deleteCard(cardId) {
+    setCards(cards.filter((card) => card.id !== cardId))
+  }
+
   function moveCard(cardId, toColumn) {
     setCards(cards.map((card) => 
       card.id === cardId ? { ...card, column: toColumn } : card
@@ -47,6 +51,7 @@ function App() {
             title={col}
             cards={cards.filter((card) => card.column === col)}
             onAddCard={addCard}
+            onDeleteCard={deleteCard}
             draggedId={draggedId}
             setDraggedId={setDraggedId}
             onDrop={moveCard} 
