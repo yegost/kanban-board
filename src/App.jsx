@@ -9,6 +9,7 @@ function App() {
     { id: 2, text: "Fix bug", column: "In Progress" },
     { id: 3, text: "Read a book", column: "Done" },
   ]);
+  const [draggedId, setDraggedId] = useState(null);
 
   function addCard(columnTitle, text) {
     const newCard = {
@@ -17,6 +18,12 @@ function App() {
       column: columnTitle,
     };
     setCards([...cards, newCard]);
+  }
+
+  function moveCard(cardId, toColumn) {
+    setCards(cards.map((card) => 
+      card.id === cardId ? { ...card, column: toColumn } : card
+    ));
   }
 
   return (
@@ -30,7 +37,11 @@ function App() {
             key={col}
             title={col}
             cards={cards.filter((card) => card.column === col)}
-            onAddCard={addCard} />
+            onAddCard={addCard}
+            draggedId={draggedId}
+            setDraggedId={setDraggedId}
+            onDrop={moveCard} 
+          />
         ))}
       </div>
     </div>

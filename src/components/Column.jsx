@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Card from "./Card";
 
-function Column({ title, cards, onAddCard }) {
+function Column({ title, cards, onAddCard, draggedId, setDraggedId, onDrop }) {
   const [adding, setAdding] = useState(false);
   const [text, setText] = useState("");
 
@@ -12,11 +12,31 @@ function Column({ title, cards, onAddCard }) {
     setAdding(false);
   }
 
+  function handleDragOver(e) {
+    e.preventDefault();
+  }
+
+  function handleDrop() {
+    if (draggedId !== null) {
+        onDrop(draggedId, title);
+        setDraggedId(null);
+    }
+  }
+
   return (
-    <div className="column">
+    <div 
+        className="column"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+    >
       <h2>{title}</h2>
       {cards.map((card) => (
-        <Card key={card.id} text={card.text} />
+        <Card 
+            key={card.id} 
+            id={card.id}
+            text={card.text} 
+            onDragStart={setDraggedId}
+        />
       ))}
       {adding ? (
         <div className="add-card-form">
