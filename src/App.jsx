@@ -4,9 +4,9 @@ import Column from "./components/Column";
 const COLUMNS = ["To Do", "In Progress", "Done"];
 
 const initialCards = [
-  { id: 1, text: "Buy groceries", column: "To Do", color: "#e94560" },
-  { id: 2, text: "Fix bug", column: "In Progress", color: "#e94560" },
-  { id: 3, text: "Read a book", column: "Done", color: "#e94560" },
+  { id: 1, text: "Buy groceries", column: "To Do", color: "#e94560", labels: [] },
+  { id: 2, text: "Fix bug", column: "In Progress", color: "#e94560", labels: [] },
+  { id: 3, text: "Read a book", column: "Done", color: "#e94560", labels: [] },
 ]
 
 function App() {
@@ -20,12 +20,13 @@ function App() {
     localStorage.setItem("kanban-cards", JSON.stringify(cards));
   }, [cards]);
 
-  function addCard(columnTitle, text, color) {
+  function addCard(columnTitle, text, color, labels) {
     const newCard = {
       id: Date.now(),
       text,
       column: columnTitle,
       color,
+      labels,
     };
     setCards([...cards, newCard]);
   }
@@ -40,9 +41,9 @@ function App() {
     ));
   }
 
-  function updateCard(cardId, newText, newColor) {
+  function updateCard(cardId, newText, newColor, newLabels) {
     setCards(cards.map((card) => 
-      card.id === cardId ? { ...card, text: newText, color: newColor } : card
+      card.id === cardId ? { ...card, text: newText, color: newColor, labels: newLabels } : card
     ));
   }
 
