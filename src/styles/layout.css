@@ -1,0 +1,47 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #16213e;
+  flex-shrink: 0;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  color: #e94560;
+}
+
+.board {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  padding: 2rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+.column {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.column h2 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a0a0b0;
+}
