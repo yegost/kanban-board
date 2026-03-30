@@ -40,9 +40,9 @@ function App() {
     ));
   }
 
-  function updateCardColor(cardId, color) {
+  function updateCard(cardId, newText, newColor) {
     setCards(cards.map((card) => 
-      card.id === cardId ? { ...card, color } : card
+      card.id === cardId ? { ...card, text: newText, color: newColor } : card
     ));
   }
 
@@ -59,7 +59,7 @@ function App() {
             cards={cards.filter((card) => card.column === col)}
             onAddCard={addCard}
             onDeleteCard={deleteCard}
-            onUpdateColor={updateCardColor}
+            onUpdateCard={updateCard}
             draggedId={draggedId}
             setDraggedId={setDraggedId}
             onDrop={moveCard} 

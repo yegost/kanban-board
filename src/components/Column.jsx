@@ -1,7 +1,16 @@
 import { useState } from "react";
 import Card from "./Card";
 
-function Column({ title, cards, onAddCard, onDeleteCard, onUpdateColor, draggedId, setDraggedId, onDrop }) {
+function Column({ 
+  title, 
+  cards, 
+  onAddCard, 
+  onDeleteCard, 
+  onUpdateCard, 
+  draggedId, 
+  setDraggedId, 
+  onDrop 
+}) {
   const [adding, setAdding] = useState(false);
   const [text, setText] = useState("");
   const [color, setColor] = useState("#e94560");
@@ -40,7 +49,7 @@ function Column({ title, cards, onAddCard, onDeleteCard, onUpdateColor, draggedI
             color={card.color}
             onDragStart={setDraggedId}
             onDelete={onDeleteCard}
-            onUpdateColor={onUpdateColor}
+            onUpdateCard={onUpdateCard}
         />
       ))}
       {adding ? (

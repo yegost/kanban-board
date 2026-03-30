@@ -1,4 +1,47 @@
-function Card({ id, text, color, onDragStart, onDelete, onUpdateColor }) {
+import { useState } from "react";
+
+function Card({ id, text, color, onDragStart, onDelete, onUpdateCard }) {
+    const [editing, setEditing] = useState(false);
+    const [editText, setEditText] = useState(text);
+    const [editColor, setEditColor] = useState(color);
+
+    function handleSave() {
+        if (editText.trim() === "") return;
+        onUpdateCard(id, editText.trim(), editColor);
+        setEditing(false);
+    }
+
+    function handleCancel() {
+        setEditText(text)
+        setEditColor(color)
+        setEditing(false)
+    }
+
+    if (editing) {
+        return (
+            <div className="card editing" style={{ borderLeftColor: editColor }}>
+                <input
+                    className="card-input"
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSave()}
+                    autoFocus
+                />
+                <div className="add-card-actions">
+                <input
+                    type="color"
+                    value={editColor}
+                    onChange={(e) => setEditColor(e.target.value)}
+                    className="color-picker"
+                    title="Change color"
+                />
+                <button className="btn-confirm" onClick={handleSave}>Save</button>
+                <button className="btn-cancel" onClick={handleCancel}>Cancel</button>
+                </div>
+            </div>
+        )
+    }
     return(
         <div 
             className="card"
@@ -6,15 +49,11 @@ function Card({ id, text, color, onDragStart, onDelete, onUpdateColor }) {
             onDragStart={() => onDragStart(id)}
             style={{ borderLeftColor: color }}
         >
-            <input
-                type="color"
-                value={color}
-                onChange={(e) => onUpdateColor(id, e.target.value)}
-                className="card-color-picker"
-                title="Change color"
-            />
             <p>{text}</p>
-            <button className="btn-delete" onClick={() => onDelete(id)}>✕</button>
+            <div className="card-actions">
+                <button className="btn-edit" onClick={() => setEditing(true)}>✏️</button>
+                <button className="btn-delete" onClick={() => onDelete(id)}>✕</button>
+            </div>
         </div>
     );
 }
