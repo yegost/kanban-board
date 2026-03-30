@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function Card({ id, text, color, onDragStart, onDelete, onUpdateCard }) {
     const [editing, setEditing] = useState(false);
     const [editText, setEditText] = useState(text);
     const [editColor, setEditColor] = useState(color);
+    const colorRef = useRef(null);
 
     function handleSave() {
         if (editText.trim() === "") return;
@@ -30,12 +31,19 @@ function Card({ id, text, color, onDragStart, onDelete, onUpdateCard }) {
                 />
                 <div className="add-card-actions">
                 <input
+                    ref={colorRef}
                     type="color"
                     value={editColor}
                     onChange={(e) => setEditColor(e.target.value)}
-                    className="color-picker"
-                    title="Change color"
+                    style={{ display: "none" }}
                 />
+                <button
+                    className="btn-color"
+                    onClick={() => colorRef.current.click()}
+                    style={{ borderColor: editColor, color: editColor}}
+                >
+                    Change color
+                </button>
                 <button className="btn-confirm" onClick={handleSave}>Save</button>
                 <button className="btn-cancel" onClick={handleCancel}>Cancel</button>
                 </div>

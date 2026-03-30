@@ -173,3 +173,36 @@ body {
   background: none;
   flex-shrink: 0;
 }
+
+.card-actions {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.btn-edit {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.btn-edit:hover {
+  background: #1a2f5a;
+}
+
+.card.editing {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.btn-color {
+  background: transparent;
+  border: 1px solid;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
