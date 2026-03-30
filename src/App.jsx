@@ -4,9 +4,9 @@ import Column from "./components/Column";
 const COLUMNS = ["To Do", "In Progress", "Done"];
 
 const initialCards = [
-  { id: 1, text: "Buy groceries", column: "To Do" },
-  { id: 2, text: "Fix bug", column: "In Progress" },
-  { id: 3, text: "Read a book", column: "Done" },
+  { id: 1, text: "Buy groceries", column: "To Do", color: "#e94560" },
+  { id: 2, text: "Fix bug", column: "In Progress", color: "#e94560" },
+  { id: 3, text: "Read a book", column: "Done", color: "#e94560" },
 ]
 
 function App() {
@@ -20,11 +20,12 @@ function App() {
     localStorage.setItem("kanban-cards", JSON.stringify(cards));
   }, [cards]);
 
-  function addCard(columnTitle, text) {
+  function addCard(columnTitle, text, color) {
     const newCard = {
       id: Date.now(),
       text,
       column: columnTitle,
+      color,
     };
     setCards([...cards, newCard]);
   }
@@ -36,6 +37,12 @@ function App() {
   function moveCard(cardId, toColumn) {
     setCards(cards.map((card) => 
       card.id === cardId ? { ...card, column: toColumn } : card
+    ));
+  }
+
+  function updateCardColor(cardId, color) {
+    setCards(cards.map((card) => 
+      card.id === cardId ? { ...card, color } : card
     ));
   }
 
@@ -52,6 +59,7 @@ function App() {
             cards={cards.filter((card) => card.column === col)}
             onAddCard={addCard}
             onDeleteCard={deleteCard}
+            onUpdateColor={updateCardColor}
             draggedId={draggedId}
             setDraggedId={setDraggedId}
             onDrop={moveCard} 

@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Card from "./Card";
 
-function Column({ title, cards, onAddCard, onDeleteCard, draggedId, setDraggedId, onDrop }) {
+function Column({ title, cards, onAddCard, onDeleteCard, onUpdateColor, draggedId, setDraggedId, onDrop }) {
   const [adding, setAdding] = useState(false);
   const [text, setText] = useState("");
+  const [color, setColor] = useState("#e94560");
 
   function handleSubmit() {
     if (text.trim() === "") return;
-    onAddCard(title, text.trim());
+    onAddCard(title, text.trim(), color);
     setText("");
+    setColor("#e94560");
     setAdding(false);
   }
 
@@ -35,8 +37,10 @@ function Column({ title, cards, onAddCard, onDeleteCard, draggedId, setDraggedId
             key={card.id} 
             id={card.id}
             text={card.text} 
+            color={card.color}
             onDragStart={setDraggedId}
             onDelete={onDeleteCard}
+            onUpdateColor={onUpdateColor}
         />
       ))}
       {adding ? (
@@ -51,6 +55,13 @@ function Column({ title, cards, onAddCard, onDeleteCard, draggedId, setDraggedId
             autoFocus
           />
           <div className="add-card-actions">
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              className="color-picker"
+              title="Pick a color"
+            />
             <button className="btn-confirm" onClick={handleSubmit}>Add</button>
             <button className="btn-cancel" onClick={() => setAdding(false)}>Cancel</button>
           </div>
